@@ -31,7 +31,7 @@ namespace DormMarket
             }
 
             MessageBox.Show("Account created successfully. Please log in.");
-
+            //insert Database code here to save the user information to the database
             var login = new LoginStudent();
             login.Show();
             this.Hide();
