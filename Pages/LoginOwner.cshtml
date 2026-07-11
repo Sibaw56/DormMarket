@@ -1,0 +1,156 @@
+@page
+@model GMCC.Pages.LoginOwner
+@{
+    ViewData["Title"] = "LoginOwner";
+    Layout = null;
+}
+
+<style>
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: #f9fafb;
+        margin: 0;
+    }
+
+    .login-wrapper {
+        display: flex;
+        justify-content: center;
+        padding: 40px 20px;
+    }
+
+    .login-card {
+        width: 100%;
+        max-width: 420px;
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 32px;
+    }
+
+    .login-title {
+        text-align: center;
+        font-size: 22px;
+        font-weight: 700;
+        color: #1f2937;
+        margin-bottom: 4px;
+    }
+
+    .login-subtitle {
+        text-align: center;
+        font-size: 13px;
+        color: #6b7280;
+        margin-bottom: 28px;
+    }
+
+    .form-group {
+        margin-bottom: 18px;
+    }
+
+    .form-label {
+        display: block;
+        font-size: 12px;
+        font-weight: 700;
+        color: #374151;
+        margin-bottom: 6px;
+        letter-spacing: 0.03em;
+    }
+
+    .form-input {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        font-size: 14px;
+        box-sizing: border-box;
+    }
+
+    .form-input::placeholder {
+        color: #9ca3af;
+    }
+
+    .btn-login {
+        width: 100%;
+        padding: 12px 0;
+        background: #374151;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 14px;
+        cursor: pointer;
+        margin-top: 8px;
+    }
+
+    .forgot-link {
+        text-align: right;
+        font-size: 12px;
+        margin-bottom: 4px;
+    }
+
+    .forgot-link button {
+        background: none;
+        border: none;
+        color: #6b7280;
+        cursor: pointer;
+        font-size: 12px;
+        padding: 0;
+    }
+
+    .register-link {
+        text-align: center;
+        font-size: 13px;
+        color: #6b7280;
+        margin-top: 16px;
+    }
+
+    .register-link button {
+        background: none;
+        border: none;
+        color: #374151;
+        font-weight: 700;
+        cursor: pointer;
+        font-size: 13px;
+        padding: 0;
+    }
+
+    .error-message {
+        color: #dc2626;
+        font-size: 13px;
+        text-align: center;
+        margin-bottom: 16px;
+    }
+</style>
+
+<div class="login-wrapper">
+    <div class="login-card">
+        <div class="login-title">DormMarket</div>
+        <div class="login-subtitle">Log in to your owner account</div>
+
+        @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+        {
+            <div class="error-message">@Model.ErrorMessage</div>
+        }
+
+        <form method="post">
+            <div class="form-group">
+                <label class="form-label">EMAIL</label>
+                <input type="email" asp-for="Email" class="form-input" placeholder="Email" />
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">PASSWORD</label>
+                <input type="password" asp-for="Password" class="form-input" placeholder="Password" />
+            </div>
+
+            <div class="forgot-link">
+                <button type="submit" asp-page-handler="ForgotPassword">Forgot password?</button>
+            </div>
+
+            <button type="submit" class="btn-login">Log In</button>
+
+            <div class="register-link">
+                Don't have an account? <button type="submit" asp-page-handler="CreateAccount">Create Account</button>
+            </div>
+        </form>
+    </div>
+</div>

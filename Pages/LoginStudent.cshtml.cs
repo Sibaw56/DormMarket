@@ -23,20 +23,7 @@ namespace GMCC.Pages
 
         public IActionResult OnPost()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            bool loginOk = true; // placeholder for Database check
-
-            if (!loginOk)
-            {
-                ErrorMessage = "Invalid email or password.";
-                return Page();
-            }
-
-            return RedirectToPage("/BrowseDormStudent", new { fullName = Email });
+            return RedirectToPage("/BrowseDormStudent");
         }
 
         public IActionResult OnPostForgotPassword()
