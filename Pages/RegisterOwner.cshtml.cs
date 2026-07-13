@@ -85,7 +85,7 @@ namespace GMCC.Pages
         private static readonly List<OwnerAccount> _owners = new();
 
         public static bool EmailExists(string email) =>
-            _owners.Any(o => o.Email.Equals(email, StringComparison.OrdinalIgnoreCase));//change when Database implement
+            _owners.Any(o => o.Email.Equals(email, StringComparison.OrdinalIgnoreCase));
 
         public static void Add(OwnerAccount owner) => _owners.Add(owner);
 
