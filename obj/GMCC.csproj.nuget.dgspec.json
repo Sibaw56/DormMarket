@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\Documents\\KUYAAAAA\\GMCC\\GMCC.csproj": {}
+    "C:\\Users\\user\\Desktop\\DormMarket\\GMCC.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\Documents\\KUYAAAAA\\GMCC\\GMCC.csproj": {
+    "C:\\Users\\user\\Desktop\\DormMarket\\GMCC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Documents\\KUYAAAAA\\GMCC\\GMCC.csproj",
+        "projectUniqueName": "C:\\Users\\user\\Desktop\\DormMarket\\GMCC.csproj",
         "projectName": "GMCC",
-        "projectPath": "C:\\Users\\User\\Documents\\KUYAAAAA\\GMCC\\GMCC.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Documents\\KUYAAAAA\\GMCC\\obj\\",
+        "projectPath": "C:\\Users\\user\\Desktop\\DormMarket\\GMCC.csproj",
+        "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\user\\Desktop\\DormMarket\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
@@ -45,6 +45,12 @@
         "net10.0": {
           "framework": "net10.0",
           "targetAlias": "net10.0",
+          "dependencies": {
+            "MongoDB.Driver": {
+              "target": "Package",
+              "version": "[3.10.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
