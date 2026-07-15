@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -43,22 +42,23 @@ namespace GMCC.Pages
                 ErrorMessage = "Please enter a valid email address.";
                 return Page();
             }
+
             if (Students.EmailExists(Email))
             {
                 ErrorMessage = "An account with this email already exists.";
                 return Page();
             }
 
-            Students.Add(new StudentAccount //temporary save student info, change after Database implementation
+            Students.Add(new StudentAccount
             {
                 FullName = FullName,
                 Email = Email,
                 ContactNumber = ContactNumber,
-                Password = Password 
+                Password = Password
             });
 
-            SuccessMessage = "Account created successfully. Please log in.";
-            return RedirectToPage("/LoginStudent");
+            SuccessMessage = "Account created successfully.";
+            return RedirectToPage("/VerifyStudent");
         }
 
         public IActionResult OnPostLogin()
@@ -80,19 +80,18 @@ namespace GMCC.Pages
         }
     }
 
-    public static class Students//temporary student added into list, change after Database implementation
+    public static class Students
     {
         private static readonly List<StudentAccount> _students = new();
 
         public static bool EmailExists(string email) =>
-            _students.Any(s => s.Email.Equals(email, StringComparison.OrdinalIgnoreCase));//change when Database implement
+            _students.Any(s => s.Email.Equals(email, StringComparison.OrdinalIgnoreCase));
 
         public static void Add(StudentAccount student) => _students.Add(student);
 
         public static StudentAccount? FindByEmail(string email) =>
             _students.FirstOrDefault(s => s.Email.Equals(email, StringComparison.OrdinalIgnoreCase));
     }
-
 
     public class StudentAccount
     {
