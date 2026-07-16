@@ -34,11 +34,14 @@ File → Open Folder → select the extracted DormMarket folder
 5. Open new terminal button beside run at the top
 
 
-6. Run the Project
+6. In terminal type "dotnet add package Tesseract"
+
+
+7. Run the Project
 
 type in terminal: dotnet run -> click https://localhost link in the terminal or type in terminal: dotnet watch
 
-7. Shutdown the system
+8. Shutdown the system
 Press ctrl + C in terminal
 
 Premade User data:
