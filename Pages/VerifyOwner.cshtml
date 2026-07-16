@@ -1,0 +1,252 @@
+@page "/owner/verify"
+@model GMCC.Pages.VerifyOwner
+@{
+    ViewData["Title"] = "VerifyOwner";
+    Layout = null;
+}
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: #f9fafb;
+    }
+
+    .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #fff;
+        border-bottom: 1px solid #e5e7eb;
+        padding: 16px 32px;
+    }
+
+    .brand {
+        font-weight: 700;
+        color: #1f2937;
+        font-size: 16px;
+    }
+
+    .owner-pill {
+        font-size: 11px;
+        border: 1px solid #d1d5db;
+        border-radius: 999px;
+        padding: 2px 10px;
+        margin-left: 8px;
+        color: #6b7280;
+    }
+
+    .nav a {
+        color: #6b7280;
+        text-decoration: none;
+        font-size: 14px;
+        margin-left: 20px;
+    }
+
+    .nav a:hover {
+        color: #1f2937;
+    }
+
+    .avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 999px;
+        background: #e5e7eb;
+    }
+
+    .container {
+        max-width: 720px;
+        margin: 32px auto;
+        padding: 0 20px;
+    }
+
+    .card {
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 28px;
+    }
+
+    .page-title {
+        font-size: 20px;
+        font-weight: 700;
+        color: #1f2937;
+        margin-bottom: 8px;
+    }
+
+    .page-subtitle {
+        font-size: 13px;
+        color: #6b7280;
+        margin-bottom: 24px;
+        line-height: 1.5;
+    }
+
+    .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-label {
+        display: block;
+        font-size: 12px;
+        font-weight: 700;
+        color: #92400e;
+        margin-bottom: 8px;
+        letter-spacing: 0.02em;
+    }
+
+    .form-input, textarea.form-input {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        font-size: 14px;
+        box-sizing: border-box;
+        font-family: inherit;
+    }
+
+    .file-upload {
+        border: 1px dashed #d1d5db;
+        border-radius: 8px;
+        padding: 18px;
+        text-align: center;
+        cursor: pointer;
+        transition: border-color 0.2s;
+    }
+
+    .file-upload:hover {
+        border-color: #374151;
+    }
+
+    .file-upload-text {
+        font-size: 12px;
+        color: #9ca3af;
+    }
+
+    .file-upload-hint {
+        font-size: 11px;
+        color: #9ca3af;
+        margin-top: 4px;
+    }
+
+    .file-upload input[type="file"] {
+        display: none;
+    }
+
+    .btn-submit {
+        padding: 12px 20px;
+        background: #1f2937;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    .error-message {
+        color: #dc2626;
+        font-size: 13px;
+        margin-bottom: 16px;
+    }
+
+    .success-message {
+        color: #16a34a;
+        font-size: 13px;
+        margin-bottom: 16px;
+    }
+</style>
+
+<div class="topbar">
+    <div>
+        <span class="brand">DormMarket</span><span class="owner-pill">OWNER</span>
+    </div>
+    <div class="nav">
+        <a href="/DashboardOwner">Dashboard</a>
+        <a href="/ProfileOwner">Profile</a>
+    </div>
+    <div class="avatar"></div>
+</div>
+
+<div class="container">
+    <div class="card">
+        <div class="page-title">Verify Your Dormitory Business</div>
+        <div class="page-subtitle">
+            Upload documents proving you legitimately own or manage this dormitory. Verified owners get a
+            "Verified Owner" badge on all their listings, which builds trust with students.
+        </div>
+
+        @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+        {
+            <div class="error-message">@Model.ErrorMessage</div>
+        }
+        @if (!string.IsNullOrEmpty(Model.SuccessMessage))
+        {
+            <div class="success-message">@Model.SuccessMessage</div>
+        }
+
+        <form method="post" enctype="multipart/form-data">
+            <div class="grid-2">
+                <div class="form-group">
+                    <label class="form-label">BUSINESS PERMIT / MAYOR'S PERMIT</label>
+                    <div class="file-upload" onclick="document.getElementById('businessPermitFile').click()">
+                        <div class="file-upload-text">&#8593; Upload document (PDF/JPG)</div>
+                        <div class="file-upload-hint" id="businessPermitFileName">No file chosen</div>
+                        <input type="file" id="businessPermitFile" asp-for="BusinessPermit" accept=".jpg,.jpeg,.png,.pdf" onchange="updateFileName(this,'businessPermitFileName')" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">GOVERNMENT-ISSUED ID</label>
+                    <div class="file-upload" onclick="document.getElementById('governmentIdFile').click()">
+                        <div class="file-upload-text">&#8593; Upload valid ID (PDF/JPG)</div>
+                        <div class="file-upload-hint" id="governmentIdFileName">No file chosen</div>
+                        <input type="file" id="governmentIdFile" asp-for="GovernmentId" accept=".jpg,.jpeg,.png,.pdf" onchange="updateFileName(this,'governmentIdFileName')" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">CERTIFICATE OF PROPERTY OWNERSHIP / LAND TITLE</label>
+                    <div class="file-upload" onclick="document.getElementById('landTitleFile').click()">
+                        <div class="file-upload-text">&#8593; Upload document</div>
+                        <div class="file-upload-hint" id="landTitleFileName">No file chosen</div>
+                        <input type="file" id="landTitleFile" asp-for="LandTitle" accept=".jpg,.jpeg,.png,.pdf" onchange="updateFileName(this,'landTitleFileName')" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">OR: LEASE / MANAGEMENT AUTHORIZATION</label>
+                    <div class="file-upload" onclick="document.getElementById('leaseAuthFile').click()">
+                        <div class="file-upload-text">&#8593; Upload if you manage (not own) the property</div>
+                        <div class="file-upload-hint" id="leaseAuthFileName">No file chosen</div>
+                        <input type="file" id="leaseAuthFile" asp-for="LeaseAuthorization" accept=".jpg,.jpeg,.png,.pdf" onchange="updateFileName(this,'leaseAuthFileName')" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">ADDITIONAL NOTES FOR REVIEWER (OPTIONAL)</label>
+                <textarea asp-for="ReviewerNotes" class="form-input" rows="3" placeholder="Any extra context for the verification team"></textarea>
+            </div>
+
+            <button type="submit" asp-page-handler="Submit" class="btn-submit">Submit Documents for Review</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function updateFileName(input, labelId) {
+        const label = document.getElementById(labelId);
+        label.textContent = input.files.length > 0 ? input.files[0].name : 'No file chosen';
+    }
+</script>

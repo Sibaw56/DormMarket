@@ -13,96 +13,102 @@
     }
 
     body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        background: #f9fafb;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif;
+        background: #ffffff;
         margin: 0;
-        padding: 20px;
-        padding-bottom: 40px;
+        padding: 0;
     }
 
     .container {
-        max-width: 560px;
+        max-width: 480px;
         margin: 0 auto;
+        padding: 32px 20px;
     }
 
-    .back-link {
-        display: inline-block;
-        color: #6b7280;
-        text-decoration: none;
-        font-size: 14px;
+    /* Header */
+    .header-title {
+        font-size: 20px;
+        font-weight: 700;
+        color: #111827;
         margin-bottom: 20px;
     }
 
-    .back-link:hover {
-        color: #1f2937;
+    /* Step indicator (two-tab bar) */
+    .step-indicator {
+        display: flex;
+        width: 100%;
+        border-radius: 8px;
+        overflow: hidden;
+        margin-bottom: 24px;
     }
 
-    .page-title {
-        font-size: 24px;
+    .step-badge {
+        flex: 1;
+        text-align: center;
+        padding: 10px 12px;
+        font-size: 13px;
         font-weight: 700;
-        color: #1f2937;
-        margin-bottom: 4px;
+        color: #fff;
     }
 
-    .page-subtitle {
+    .step-badge.active {
+        background: #0f4c4c;
+    }
+
+    .step-badge.inactive {
+        background: #7fb8b3;
+    }
+
+    /* Main title */
+    .main-title {
+        font-size: 22px;
+        font-weight: 700;
+        color: #111827;
+        margin-bottom: 10px;
+    }
+
+    .main-subtitle {
         font-size: 14px;
         color: #6b7280;
+        line-height: 1.6;
         margin-bottom: 24px;
-        line-height: 1.5;
     }
 
-    .card {
-        background: #fff;
-        border-radius: 12px;
-        border: 1px solid #e5e7eb;
-        padding: 24px;
-        margin-bottom: 16px;
-    }
-
+    /* Form */
     .form-group {
-        margin-bottom: 18px;
+        margin-bottom: 20px;
     }
 
     .form-label {
         display: block;
         font-size: 12px;
         font-weight: 700;
-        color: #374151;
-        margin-bottom: 6px;
-        letter-spacing: 0.03em;
+        color: #111827;
+        margin-bottom: 8px;
+        letter-spacing: 0.02em;
     }
 
-    .form-input, .form-select {
-        width: 100%;
-        padding: 10px 12px;
-        border: 1px solid #d1d5db;
-        border-radius: 8px;
-        font-size: 14px;
-        box-sizing: border-box;
-        background: #fff;
-    }
-
-    .form-input::placeholder {
-        color: #9ca3af;
-    }
-
+    /* File upload */
     .file-upload {
         border: 2px dashed #d1d5db;
-        border-radius: 8px;
-        padding: 20px;
+        border-radius: 6px;
+        padding: 28px 20px;
         text-align: center;
         cursor: pointer;
-        transition: border-color 0.2s;
+        transition: border-color 0.2s, background 0.2s;
+        background: #fafafa;
     }
 
     .file-upload:hover {
-        border-color: #374151;
+        border-color: #0f4c4c;
+        background: #f5f5f5;
     }
 
     .file-upload-icon {
-        font-size: 32px;
+        font-size: 26px;
         display: block;
-        margin-bottom: 8px;
+        margin-bottom: 6px;
+        color: #6b7280;
     }
 
     .file-upload-text {
@@ -110,86 +116,142 @@
         color: #6b7280;
     }
 
-    .file-upload-hint {
-        font-size: 11px;
-        color: #9ca3af;
-        margin-top: 4px;
-    }
-
     .file-upload input[type="file"] {
         display: none;
     }
 
-    .btn-submit {
-        width: 100%;
-        padding: 12px 0;
-        background: #374151;
-        color: #fff;
-        border: none;
-        border-radius: 8px;
-        font-weight: 600;
-        font-size: 14px;
-        cursor: pointer;
+    .file-name {
+        font-size: 12px;
+        color: #0f4c4c;
         margin-top: 8px;
+        display: none;
+        text-align: center;
     }
 
-    .btn-skip {
+    .file-name.show {
+        display: block;
+    }
+
+    /* Optional text */
+    .optional-text {
+        font-size: 11px;
+        color: #9ca3af;
+        font-weight: 400;
+        letter-spacing: 0.02em;
+    }
+
+    .form-input {
         width: 100%;
-        padding: 12px 0;
-        background: transparent;
-        color: #6b7280;
+        padding: 12px;
         border: 1px solid #d1d5db;
-        border-radius: 8px;
-        font-weight: 600;
+        border-radius: 6px;
         font-size: 14px;
-        cursor: pointer;
-        margin-top: 8px;
-        transition: background 0.2s;
-    }
-
-    .btn-skip:hover {
+        box-sizing: border-box;
         background: #f3f4f6;
-    }
-
-    .info-box {
-        background: #f3f4f6;
-        border-radius: 8px;
-        padding: 12px 16px;
-        font-size: 13px;
-        color: #6b7280;
-        margin-top: 12px;
-    }
-
-    .info-box strong {
         color: #1f2937;
     }
 
-    .optional-text {
-        font-size: 12px;
+    .form-input::placeholder {
         color: #9ca3af;
-        font-weight: 400;
     }
 
+    .form-input:focus {
+        outline: none;
+        border-color: #0f4c4c;
+        box-shadow: 0 0 0 3px rgba(15, 76, 76, 0.12);
+    }
+
+    /* Submit button */
+    .btn-submit {
+        width: 100%;
+        padding: 14px 0;
+        background: #0f4c4c;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        font-weight: 700;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background 0.2s;
+        margin-top: 4px;
+    }
+
+    .btn-submit:hover {
+        background: #0c3d3d;
+    }
+
+    /* Info box */
+    .info-box {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        background: #f9fafb;
+        border-radius: 8px;
+        padding: 14px 16px;
+        margin-top: 16px;
+    }
+
+    .info-box-icon {
+        flex-shrink: 0;
+        width: 28px;
+        height: 28px;
+        border-radius: 6px;
+        background: #eef2f2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+    }
+
+    .info-box-text {
+        font-size: 13px;
+        color: #6b7280;
+        line-height: 1.5;
+    }
+
+    .info-box-text strong {
+        display: block;
+        color: #111827;
+        font-weight: 700;
+        font-size: 13px;
+        margin-bottom: 2px;
+    }
+
+    /* Error/Success messages */
     .error-message {
         color: #dc2626;
         font-size: 13px;
         text-align: center;
         margin-bottom: 16px;
+        padding: 10px;
+        background: #fef2f2;
+        border-radius: 8px;
     }
 
     .success-message {
-        color: #16a34a;
+        color: #0f4c4c;
         font-size: 13px;
         text-align: center;
         margin-bottom: 16px;
+        padding: 10px;
+        background: #f0fdf4;
+        border-radius: 8px;
     }
 </style>
 
 <div class="container">
-    <a href="/StudentProfile" class="back-link">← Back to Profile</a>
-    
-    <h1 class="page-title">Confirm Your Student Status</h1>
-    <p class="page-subtitle">Upload a document showing you're currently enrolled. This confirms you're a real student - separate from confirming you've actually rented a dorm - and unlocks a "Verified Student" badge on your profile.</p>
+    <div class="header-title">DormMarket</div>
+
+    <div class="step-indicator">
+        <div class="step-badge active">Step 1: Verify your Student</div>
+        <div class="step-badge inactive">Step 2: Verify you've rented</div>
+    </div>
+
+    <h1 class="main-title">Confirm your Student Status</h1>
+    <p class="main-subtitle">
+        Upload a document showing you're currently enrolled. This confirms you're a real student -
+        separate from confirming you've actually rented a dorm - and unlocks a "Verified Student" badge on your profile.
+    </p>
 
     @if (!string.IsNullOrEmpty(Model.ErrorMessage))
     {
@@ -200,57 +262,55 @@
         <div class="success-message">@Model.SuccessMessage</div>
     }
 
-    <div class="card">
-        <form method="post" enctype="multipart/form-data">
-            <div class="form-group">
-                <label class="form-label">SCHOOL / UNIVERSITY</label>
-                <select class="form-select" asp-for="School">
-                    <option value="">Select your school</option>
-                    <option value="Cebu Institute of Technology - University">Cebu Institute of Technology - University</option>
-                    <option value="University of San Carlos">University of San Carlos</option>
-                    <option value="University of Cebu">University of Cebu</option>
-                    <option value="University of the Philippines Cebu">University of the Philippines Cebu</option>
-                    <option value="Cebu Normal University">Cebu Normal University</option>
-                    <option value="Southwestern University">Southwestern University</option>
-                    <option value="Other">Other</option>
-                </select>
-            </div>
+    <form method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label class="form-label">SCHOOL / UNIVERSITY</label>
+            <input type="text" class="form-input" placeholder="Type your school name (e.g., Cebu Institute of Technology - University)" asp-for="School" required />
+        </div>
 
-            <div class="form-group">
-                <label class="form-label">STUDENT ID OR CERTIFICATE OF REGISTRATION (COR)</label>
-                <div class="file-upload" onclick="document.getElementById('fileInput').click()">
-                    <span class="file-upload-icon">📄</span>
-                    <div class="file-upload-text">Upload file (JPG, PNG or PDF, max 10MB)</div>
-                    <div class="file-upload-hint" id="fileName">No file chosen</div>
-                    <input type="file" id="fileInput" name="StudentIdFile" accept=".jpg,.jpeg,.png,.pdf" onchange="updateFileName(this)" />
-                </div>
+        <div class="form-group">
+            <label class="form-label">STUDENT ID</label>
+            <div class="file-upload" onclick="document.getElementById('fileInput').click()">
+                <span class="file-upload-icon">&#8593;</span>
+                <div class="file-upload-text">Upload file (JPG, PNG, max 10MB)</div>
+                <input type="file" id="fileInput" name="StudentIdFile" accept=".jpg,.jpeg,.png,.pdf" onchange="updateFileName(this)" required />
             </div>
+            <div class="file-name" id="fileDisplayName"></div>
+        </div>
 
-            <div class="form-group">
-                <label class="form-label">SCHOOL EMAIL <span class="optional-text">(OPTIONAL, SPEEDS UP REVIEW)</span></label>
-                <input type="email" class="form-input" placeholder="yourname@school.edu.ph" asp-for="SchoolEmail" />
-            </div>
+        <div class="form-group">
+            <label class="form-label">SCHOOL EMAIL <span class="optional-text">(OPTIONAL, SPEEDS REVIEW)</span></label>
+            <input type="email" class="form-input" placeholder="yourname@school.edu.ph" asp-for="SchoolEmail" />
+        </div>
 
-            <button type="submit" asp-page-handler="Submit" class="btn-submit">Submit for Student Verification</button>
-        </form>
-    </div>
+        <button type="submit" asp-page-handler="Submit" class="btn-submit">Submit for Student Verification</button>
+    </form>
 
     <div class="info-box">
-        <strong>Pending Review</strong> — Reviewed within 1-2 days. This step is optional but recommended - verified students are more trusted by owners and other students.
+        <div class="info-box-icon">&#128196;</div>
+        <div class="info-box-text">
+            @if (Model.IsPendingReview)
+            {
+                <strong>Pending Review</strong>
+                <span>Your ID was submitted and is being reviewed. This usually takes 1&ndash;2 days.</span>
+            }
+            else
+            {
+                <strong>Pending Review</strong>
+                <span>Reviewed within 1&ndash;2 days. This step is optional but recommended &mdash; verified students are more trusted by owners and other students.</span>
+            }
+        </div>
     </div>
-
-    <form method="post">
-        <button type="submit" asp-page-handler="Skip" class="btn-skip">Skip for Now, Continue</button>
-    </form>
 </div>
 
 <script>
     function updateFileName(input) {
-        const fileName = document.getElementById('fileName');
+        const fileDisplayName = document.getElementById('fileDisplayName');
         if (input.files.length > 0) {
-            fileName.textContent = input.files[0].name;
+            fileDisplayName.textContent = '📎 ' + input.files[0].name;
+            fileDisplayName.classList.add('show');
         } else {
-            fileName.textContent = 'No file chosen';
+            fileDisplayName.classList.remove('show');
         }
     }
 </script>

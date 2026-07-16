@@ -118,7 +118,7 @@ namespace GMCC.Pages
                 UserId = User.Identity?.Name
             };// put this in database
 
-            return RedirectToPage("/RenterVerify", new { studentVerification = "approved" });
+            return RedirectToPage("/RenterVerify");
         }
 
         private (bool IsSuccess, string Message) RunLocalOcrScan(byte[] imageBytes, string userInputSchool)
@@ -185,7 +185,7 @@ namespace GMCC.Pages
 
         public IActionResult OnPostSkip()
         {
-            return RedirectToPage("/RenterVerify", new { studentVerification = "skipped" });
+            return RedirectToPage("/RenterVerify");
         }
     }
 
