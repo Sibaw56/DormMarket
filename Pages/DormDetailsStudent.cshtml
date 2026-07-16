@@ -142,6 +142,9 @@
         }
 
         .btn-message {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             width: 100%;
             background: #0f766e;
             color: #fff;
@@ -151,6 +154,7 @@
             font-size: 14px;
             font-weight: 700;
             cursor: pointer;
+            text-decoration: none;
             margin-top: 20px;
         }
 
@@ -233,7 +237,7 @@
                     <span class="info-label">Availability</span>
                     <span class="pill-avail">@Model.Dorm.Status</span>
                 </div>
-                <button type="button" class="btn-message">Message Owner</button>
+                <a asp-page="/ContactOwnerStudent" asp-route-id="@Model.Dorm.Id" class="btn-message">Message Owner</a>
             </div>
         </div>
 
