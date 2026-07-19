@@ -25,18 +25,6 @@
         margin: 0 auto;
     }
 
-    .back-link {
-        display: inline-block;
-        color: #6b7280;
-        text-decoration: none;
-        font-size: 14px;
-        margin-bottom: 20px;
-    }
-
-    .back-link:hover {
-        color: #1f2937;
-    }
-
     .page-title {
         font-size: 24px;
         font-weight: 700;
@@ -232,8 +220,6 @@
 </style>
 
 <div class="container">
-    <a href="/StudentProfile" class="back-link">← Back to Profile</a>
-    
     <h1 class="page-title">Have You Rented a Dorm Yet?</h1>
     <p class="page-subtitle">This helps us verify your renter status.</p>
 
@@ -248,7 +234,6 @@
 
     <div class="card">
         <form method="post" enctype="multipart/form-data">
-            <!-- Radio selection -->
             <div class="radio-group">
                 <label class="radio-option" id="rentedBeforeOption">
                     <input type="radio" name="RentedBefore" value="true" onchange="toggleRentedFields(true)" />
@@ -264,17 +249,10 @@
                 </label>
             </div>
 
-            <!-- Rented fields (hidden by default) -->
             <div id="rentedFields" class="hidden">
                 <div class="form-group">
                     <label class="form-label">DORMITORY YOU RENTED / ARE RENTING</label>
-                    <select class="form-select" asp-for="Dormitory">
-                        <option value="">Select or type dormitory name</option>
-                        <option value="Casa Verde Dormitory">Casa Verde Dormitory</option>
-                        <option value="Sunrise Dormitory">Sunrise Dormitory</option>
-                        <option value="Green Residence">Green Residence</option>
-                        <option value="Other">Other</option>
-                    </select>
+                    <input type="text" class="form-input" asp-for="Dormitory" placeholder="Type dormitory name" autocomplete="off" />
                 </div>
 
                 <div class="form-group">
