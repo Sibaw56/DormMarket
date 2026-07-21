@@ -8,8 +8,5 @@ public class MongoDBService
             _database = client.GetDatabase( configuration["MongoDB:DatabaseName"]); 
         } 
     public IMongoCollection<studentUser> Students => _database.GetCollection<studentUser>("Students"); 
-    public IMongoCollection<ownerUser> Owners => _database.GetCollection<ownerUser>("Owner"); 
-    public IMongoCollection<dormListing> Listings => _database.GetCollection<dormListing>("Listings"); 
-    public IMongoCollection<Reviews> Reviews => _database.GetCollection<Reviews>("Reviews"); 
 
 }

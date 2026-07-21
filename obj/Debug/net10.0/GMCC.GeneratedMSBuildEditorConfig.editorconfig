@@ -12,45 +12,77 @@ build_property.EntryPointFilePath =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = GMCC
 build_property.RootNamespace = GMCC
-build_property.ProjectDir = C:\Users\User\Documents\KUYAAAAA\GMCC\
+build_property.ProjectDir = C:\Users\user\Desktop\DormMarket\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 10.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\User\Documents\KUYAAAAA\GMCC
+build_property.MSBuildProjectDirectory = C:\Users\user\Desktop\DormMarket
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 10.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/User/Documents/KUYAAAAA/GMCC/Pages/Error.cshtml]
+[C:/Users/user/Desktop/DormMarket/Pages/AddDormOwner.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRkRG9ybU93bmVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/Desktop/DormMarket/Pages/BrowseDormOwner.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQnJvd3NlRG9ybU93bmVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/Desktop/DormMarket/Pages/BrowseDormStudent.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQnJvd3NlRG9ybVN0dWRlbnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/Desktop/DormMarket/Pages/DashboardOwner.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGFzaGJvYXJkT3duZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/Desktop/DormMarket/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Documents/KUYAAAAA/GMCC/Pages/Index.cshtml]
+[C:/Users/user/Desktop/DormMarket/Pages/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Documents/KUYAAAAA/GMCC/Pages/LoginStudent.cshtml]
+[C:/Users/user/Desktop/DormMarket/Pages/LoginOwner.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW5Pd25lci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/Desktop/DormMarket/Pages/LoginStudent.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW5TdHVkZW50LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Documents/KUYAAAAA/GMCC/Pages/RegisterStudent.cshtml]
+[C:/Users/user/Desktop/DormMarket/Pages/ProfileOwner.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvZmlsZU93bmVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/Desktop/DormMarket/Pages/ProfileStudent.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvZmlsZVN0dWRlbnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/Desktop/DormMarket/Pages/RegisterOwner.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVnaXN0ZXJPd25lci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/Desktop/DormMarket/Pages/RegisterStudent.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVnaXN0ZXJTdHVkZW50LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Documents/KUYAAAAA/GMCC/Pages/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/user/Desktop/DormMarket/Pages/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Documents/KUYAAAAA/GMCC/Pages/_ViewImports.cshtml]
+[C:/Users/user/Desktop/DormMarket/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Documents/KUYAAAAA/GMCC/Pages/_ViewStart.cshtml]
+[C:/Users/user/Desktop/DormMarket/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Documents/KUYAAAAA/GMCC/Pages/Shared/_Layout.cshtml]
+[C:/Users/user/Desktop/DormMarket/Pages/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-eza5ha9qsx

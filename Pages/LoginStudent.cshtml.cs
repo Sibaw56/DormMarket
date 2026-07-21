@@ -40,17 +40,19 @@ namespace GMCC.Pages
                 .Find(s => s.Email == Email)
                 .FirstOrDefault();
 
-            if (student == null || student.Password != Password) 
+            if (student == null || student.Password != Password) //IF STUDENT IS NULL or PASSWORD DOES NOT MATCH, RETURN ERROR MESSAGE
             {
                 ErrorMessage = "Invalid email or password.";
                 return Page();
             }
 
-            else
+            else //SUCCESSFUL LOGIN, STAY IN PAGE (TEMPORARY)
             {
-                HttpContext.Session.SetInt32("StudentId", student.Id);
-                return RedirectToPage("/BrowseDormStudent");
+                ErrorMessage = "User Verified (test).";
+                return Page();
             }
+
+            //return RedirectToPage("/BrowseDormStudent");
         }
 
         public IActionResult OnPostForgotPassword()
