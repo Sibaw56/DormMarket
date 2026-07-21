@@ -1,14 +1,21 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using MongoDB.Driver;
 
 namespace GMCC.Pages
 {
     public class RegisterStudent : PageModel
     {
+        private readonly MongoDBService _mongoService;
+
+        public RegisterStudent(MongoDBService mongoService)
+        {
+            _mongoService = mongoService;
+        }
+
         [BindProperty]
         public string FullName { get; set; }
 
@@ -51,7 +58,9 @@ namespace GMCC.Pages
 
             Students.Add(new StudentAccount
             {
-                FullName = FullName,
+                Id = nextId,
+                FirstName = firstName,
+                LastName = lastName,
                 Email = Email,
                 ContactNumber = ContactNumber,
                 Password = Password

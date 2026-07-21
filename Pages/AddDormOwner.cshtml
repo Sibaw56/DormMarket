@@ -1,11 +1,446 @@
 @page
 @model GMCC.Pages.AddDormOwner
 @{
-    ViewData["Title"] = "AddDormOwner";
+    ViewData["Title"] = "Add Dormitory";
+    Layout = null;
+
+    var nearSchools = new[]
+    {
+        "Cebu Institute of Technology-University (CIT-U)",
+        "University of San Carlos (USC)",
+        "University of Cebu (UC)",
+        "University of San Jose-Recoletos (USJR)",
+        "Southwestern University PHINMA (SWU)",
+        "Cebu Normal University (CNU)",
+    };
+
+    var amenities = new[] { "WiFi", "Kitchen", "Laundry", "Parking", "CCTV", "Aircon" };
 }
 
-<h1>@ViewData["Title"]</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - DormMarket</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-<div>
-    
-</div>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: #f9fafb;
+            margin: 0;
+            color: #1f2937;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 14px 32px;
+        }
+
+        .navbar-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .navbar-brand {
+            font-size: 18px;
+            font-weight: 800;
+            color: #1f2937;
+        }
+
+        .owner-badge {
+            background: #d1fae5;
+            color: #047857;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 999px;
+        }
+
+        .navbar-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .navbar-links a {
+            text-decoration: none;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .navbar-links a.active {
+            color: #1f2937;
+            font-weight: 700;
+        }
+
+        .avatar-circle {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: #d1d5db;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 28px 32px 60px;
+        }
+
+        .page-title {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 24px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .section-title {
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+            color: #374151;
+            margin: 0 0 16px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            color: #374151;
+            margin-bottom: 6px;
+            letter-spacing: 0.02em;
+        }
+
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            background: #fff;
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 90px;
+        }
+
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            font-size: 13px;
+            color: #374151;
+        }
+
+        .checkbox-item input {
+            margin-top: 2px;
+        }
+
+        .photo-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .photo-placeholder {
+            width: 80px;
+            height: 80px;
+            background: #e5e7eb;
+            border-radius: 8px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .photo-add-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            color: #9ca3af;
+            border: 1.5px dashed #cbd5e1;
+            cursor: pointer;
+            background: #f9fafb;
+        }
+
+        .photo-remove-btn {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #dc2626;
+            color: #fff;
+            font-size: 11px;
+            line-height: 18px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .photo-row {
+            flex-wrap: wrap;
+        }
+
+        .photo-hint {
+            font-size: 12px;
+            color: #9ca3af;
+            margin-bottom: 24px;
+        }
+
+        .radio-row {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: #374151;
+        }
+
+        .action-row {
+            display: flex;
+            gap: 12px;
+            margin-top: 32px;
+        }
+
+        .btn-publish {
+            background: #0f766e;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 22px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .btn-draft {
+            background: #fff;
+            color: #374151;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            padding: 12px 22px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <span class="navbar-brand">DormMarket</span>
+            <span class="owner-badge">Owner</span>
+        </div>
+        <div class="navbar-links">
+            <a asp-page="/DashboardOwner">Dashboard</a>
+            <a asp-page="/ProfileOwner">Profile</a>
+        </div>
+        <div class="avatar-circle"></div>
+    </nav>
+
+    <div class="container">
+        <div class="page-title">Add Dormitory</div>
+
+        @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+        {
+            <div style="background:#fee2e2;color:#b91c1c;padding:10px 14px;border-radius:8px;font-size:13px;margin-bottom:20px;">@Model.ErrorMessage</div>
+        }
+
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-grid">
+                <div>
+                    <p class="section-title">DORMITORY INFO</p>
+
+                    <div class="form-group">
+                        <label class="form-label">DORMITORY NAME</label>
+                        <input type="text" asp-for="DormitoryName" class="form-input" placeholder="Dormitory name" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">ADDRESS/LOCATION</label>
+                        <input type="text" asp-for="AddressLocation" class="form-input" placeholder="Address / location" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">DESCRIPTION</label>
+                        <textarea asp-for="Description" class="form-textarea" placeholder="Describe the dormitory"></textarea>
+                    </div>
+
+                    <p class="section-title">NEAR SCHOOL (CEBU CITY)</p>
+                    <div class="checkbox-grid">
+                        @foreach (var school in nearSchools)
+                        {
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="NearSchools" value="@school" />
+                                <span>@school</span>
+                            </label>
+                        }
+                    </div>
+                </div>
+
+                <div>
+                    <p class="section-title">ROOM PHOTOS</p>
+                    <div class="photo-row" id="photo-preview-row">
+                        <label class="photo-placeholder photo-add-btn" id="photo-add-btn">+</label>
+                    </div>
+                    <input type="file" id="photo-input" name="Photos" accept="image/*" multiple style="display:none;" onchange="previewPhotos(this)" />
+                    <p class="photo-hint" id="photo-count-hint">Upload up to 8 photos</p>
+
+                    <p class="section-title">AMENITIES</p>
+                    <div class="checkbox-grid">
+                        @foreach (var amenity in amenities)
+                        {
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="Amenities" value="@amenity" />
+                                <span>@amenity</span>
+                            </label>
+                        }
+                    </div>
+
+                    <p class="section-title">CURFEW</p>
+                    <div class="radio-row">
+                        <label class="radio-item">
+                            <input type="radio" name="Curfew" value="HasCurfew" />
+                            <span>Has Curfew</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="Curfew" value="NoCurfew" />
+                            <span>No Curfew</span>
+                        </label>
+                    </div>
+
+                    <p class="section-title">COMFORT ROOM</p>
+                    <div class="radio-row">
+                        <label class="radio-item">
+                            <input type="radio" name="ComfortRoom" value="SharedCR" />
+                            <span>Shared CR</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="ComfortRoom" value="OwnCR" />
+                            <span>Own CR</span>
+                        </label>
+                    </div>
+
+                    <p class="section-title">ROOM TYPE</p>
+                    <div class="radio-row">
+                        <label class="radio-item">
+                            <input type="radio" name="RoomType" value="Solo" />
+                            <span>Solo</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="RoomType" value="Shared" />
+                            <span>Shared</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="RoomType" value="Bedspace" />
+                            <span>Bedspace</span>
+                        </label>
+                    </div>
+
+                    <p class="section-title">MONTHLY RENT</p>
+                    <div class="form-group">
+                        <input type="text" asp-for="MonthlyRent" class="form-input" placeholder="e.g. 3500" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-row">
+                <button type="submit" asp-page-handler="Publish" class="btn-publish">PUBLISH LISTING</button>
+                <button type="submit" asp-page-handler="Draft" class="btn-draft">SAVE AS DRAFT</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        let selectedPhotos = [];
+        const MAX_PHOTOS = 8;
+
+        document.getElementById('photo-add-btn').addEventListener('click', function () {
+            document.getElementById('photo-input').click();
+        });
+
+        function previewPhotos(input) {
+            const newFiles = Array.from(input.files || []);
+
+            for (const file of newFiles) {
+                if (selectedPhotos.length >= MAX_PHOTOS) break;
+                selectedPhotos.push(file);
+            }
+
+            syncFileInput();
+            renderPreviews();
+        }
+
+        function removePhoto(index) {
+            selectedPhotos.splice(index, 1);
+            syncFileInput();
+            renderPreviews();
+        }
+
+        function syncFileInput() {
+            const dataTransfer = new DataTransfer();
+            selectedPhotos.forEach(file => dataTransfer.items.add(file));
+            document.getElementById('photo-input').files = dataTransfer.files;
+        }
+
+        function renderPreviews() {
+            const row = document.getElementById('photo-preview-row');
+            const addBtn = document.getElementById('photo-add-btn');
+
+            row.querySelectorAll('.photo-thumb').forEach(el => el.remove());
+
+            selectedPhotos.forEach((file, index) => {
+                const url = URL.createObjectURL(file);
+                const thumb = document.createElement('div');
+                thumb.className = 'photo-placeholder photo-thumb';
+                thumb.style.backgroundImage = `url(${url})`;
+
+                const removeBtn = document.createElement('span');
+                removeBtn.className = 'photo-remove-btn';
+                removeBtn.textContent = '×';
+                removeBtn.onclick = () => removePhoto(index);
+                thumb.appendChild(removeBtn);
+
+                row.insertBefore(thumb, addBtn);
+            });
+
+            addBtn.style.display = selectedPhotos.length >= MAX_PHOTOS ? 'none' : 'flex';
+            document.getElementById('photo-count-hint').textContent =
+                `${selectedPhotos.length}/${MAX_PHOTOS} photos selected`;
+        }
+    </script>
+</body>
+</html>

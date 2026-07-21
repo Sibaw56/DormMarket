@@ -1,11 +1,340 @@
-@page
-@model GMCC.Pages.BrowseDormStudent
+@page 
+@model GMCC.Pages.BrowseDormOwner
 @{
-    ViewData["Title"] = "BrowseDormOwner";
+    ViewData["Title"] = "Manage Listing";
+    Layout = null;
 }
 
-<h1>@ViewData["Title"]</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - DormMarket</title>
+    <style>
+        * { box-sizing: border-box; }
 
-<div>
-    
-</div>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: #f0f4f3;
+            margin: 0;
+            color: #1f2937;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 14px 32px;
+        }
+
+        .navbar-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .navbar-brand {
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .owner-badge {
+            background: #d1fae5;
+            color: #047857;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 999px;
+        }
+
+        .navbar-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .navbar-links a {
+            text-decoration: none;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .avatar-circle {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: #d1d5db;
+        }
+
+        .container {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 28px 32px 60px;
+        }
+
+        .header-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .editing-title {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-delete {
+            background: #fff;
+            color: #b91c1c;
+            border: 1px solid #fecaca;
+            border-radius: 8px;
+            padding: 10px 16px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .btn-save {
+            background: #0f766e;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 16px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .section-title {
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+            color: #374151;
+            margin-bottom: 14px;
+        }
+
+        .rooms-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 18px;
+        }
+
+        .rooms-table th {
+            text-align: left;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.03em;
+            color: #6b7280;
+            padding: 0 0 10px;
+        }
+
+        .rooms-table td {
+            padding: 8px 10px 8px 0;
+            vertical-align: middle;
+        }
+
+        .room-type-input, .room-price-input {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 13px;
+            font-family: inherit;
+        }
+
+        .room-price-input {
+            max-width: 120px;
+        }
+
+        .price-wrap {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .peso {
+            color: #6b7280;
+            font-size: 13px;
+        }
+
+        .avail-toggle {
+            display: flex;
+            gap: 6px;
+        }
+
+        .avail-btn {
+            border: 1px solid #d1d5db;
+            background: #fff;
+            color: #6b7280;
+            border-radius: 6px;
+            padding: 6px 12px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .avail-btn.active-available {
+            background: #d1fae5;
+            border-color: #a7f3d0;
+            color: #047857;
+        }
+
+        .avail-btn.active-full {
+            background: #f3f4f6;
+            border-color: #d1d5db;
+            color: #374151;
+        }
+
+        .room-remove {
+            color: #b91c1c;
+            font-size: 13px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-weight: 700;
+        }
+
+        .btn-add-room {
+            background: #0f766e;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 18px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 6px;
+        }
+
+        .error-message {
+            background: #fee2e2;
+            color: #b91c1c;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <span class="navbar-brand">DormMarket</span>
+            <span class="owner-badge">Owner</span>
+        </div>
+        <div class="navbar-links">
+            <a asp-page="/DashboardOwner">Dashboard</a>
+            <a asp-page="/ProfileOwner">Profile</a>
+        </div>
+        <div class="avatar-circle"></div>
+    </nav>
+
+    <div class="container">
+        @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+        {
+            <div class="error-message">@Model.ErrorMessage</div>
+        }
+
+        <form method="post" id="manage-form">
+            <input type="hidden" asp-for="Id" />
+
+            <div class="header-row">
+                <div class="editing-title">Editing: @Model.DormitoryName</div>
+                <div class="header-actions">
+                    <button type="submit" asp-page-handler="DeleteListing" class="btn-delete"
+                            onclick="return confirm('Delete this listing? This cannot be undone.');">DELETE LISTING</button>
+                    <button type="submit" asp-page-handler="SaveChanges" class="btn-save">SAVE CHANGES</button>
+                </div>
+            </div>
+
+            <div class="section-title">ROOMS</div>
+
+            <table class="rooms-table">
+                <thead>
+                    <tr>
+                        <th style="width:40%;">ROOM TYPE</th>
+                        <th style="width:25%;">PRICE/MONTH</th>
+                        <th style="width:30%;">AVAILABILITY</th>
+                        <th style="width:5%;"></th>
+                    </tr>
+                </thead>
+                <tbody id="rooms-body">
+                    @for (int i = 0; i < Model.RoomTypeNames.Count; i++)
+                    {
+                        var availability = i < Model.RoomAvailabilities.Count ? Model.RoomAvailabilities[i] : "Available";
+                        <tr class="room-row">
+                            <td><input type="text" name="RoomTypeNames" class="room-type-input" value="@Model.RoomTypeNames[i]" placeholder="e.g. Shared (2 pax) room / Solo room" /></td>
+                            <td>
+                                <div class="price-wrap">
+                                    <span class="peso">₱</span>
+                                    <input type="text" name="RoomPrices" class="room-price-input" value="@(i < Model.RoomPrices.Count ? Model.RoomPrices[i] : "")" placeholder="3,500" />
+                                </div>
+                            </td>
+                            <td>
+                                <input type="hidden" name="RoomAvailabilities" class="avail-hidden" value="@availability" />
+                                <div class="avail-toggle">
+                                    <button type="button" class="avail-btn @(availability == "Available" ? "active-available" : "")" onclick="setAvailability(this, 'Available')">Available</button>
+                                    <button type="button" class="avail-btn @(availability == "Full" ? "active-full" : "")" onclick="setAvailability(this, 'Full')">Full</button>
+                                </div>
+                            </td>
+                            <td><button type="button" class="room-remove" onclick="removeRoom(this)">✕</button></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <button type="button" class="btn-add-room" onclick="addRoom()">+ Add Room Type</button>
+        </form>
+    </div>
+
+    <script>
+        function setAvailability(btn, value) {
+            const row = btn.closest('.room-row');
+            row.querySelector('.avail-hidden').value = value;
+            row.querySelectorAll('.avail-btn').forEach(b => {
+                b.classList.remove('active-available', 'active-full');
+            });
+            btn.classList.add(value === 'Available' ? 'active-available' : 'active-full');
+        }
+
+        function removeRoom(btn) {
+            btn.closest('.room-row').remove();
+        }
+
+        function addRoom() {
+            const tbody = document.getElementById('rooms-body');
+            const row = document.createElement('tr');
+            row.className = 'room-row';
+            row.innerHTML = `
+                <td><input type="text" name="RoomTypeNames" class="room-type-input" placeholder="e.g. Shared (4pax)" /></td>
+                <td>
+                    <div class="price-wrap">
+                        <span class="peso">₱</span>
+                        <input type="text" name="RoomPrices" class="room-price-input" placeholder="3,500" />
+                    </div>
+                </td>
+                <td>
+                    <input type="hidden" name="RoomAvailabilities" class="avail-hidden" value="Available" />
+                    <div class="avail-toggle">
+                        <button type="button" class="avail-btn active-available" onclick="setAvailability(this, 'Available')">Available</button>
+                        <button type="button" class="avail-btn" onclick="setAvailability(this, 'Full')">Full</button>
+                    </div>
+                </td>
+                <td><button type="button" class="room-remove" onclick="removeRoom(this)">✕</button></td>
+            `;
+            tbody.appendChild(row);
+        }
+    </script>
+</body>
+</html>

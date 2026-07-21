@@ -1,13 +1,21 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using MongoDB.Driver;
+
 namespace GMCC.Pages
 {
     public class RegisterOwner : PageModel
     {
+        private readonly MongoDBService _mongoService;
+
+        public RegisterOwner(MongoDBService mongoService)
+        {
+            _mongoService = mongoService;
+        }
+
         [BindProperty]
         public string FullName { get; set; }
 
@@ -42,23 +50,37 @@ namespace GMCC.Pages
                 return Page();
             }
 
-            // TODO (DB teammate): replace Owners store below with a real DB insert.
-            if (Owners.EmailExists(Email))
+            var existing = _mongoService.Owners
+                .Find(o => o.Email == Email)
+                .FirstOrDefault();
+
+            if (existing != null)
             {
                 ErrorMessage = "An account with this email already exists.";
                 return Page();
             }
 
-            Owners.Add(new OwnerAccount //temporary save owner info, change after Database implementation
+            var maxId = _mongoService.Owners
+                .Find(FilterDefinition<ownerUser>.Empty)
+                .SortByDescending(o => o.Id)
+                .Limit(1)
+                .FirstOrDefault();
+            var nextId = (maxId?.Id ?? 0) + 1;
+
+            var newOwner = new ownerUser
             {
+                Id = nextId,
                 FullName = FullName,
                 Email = Email,
+                Password = Password,
                 ContactNumber = ContactNumber,
-                Password = Password 
-            });
+                DateJoined = DateTime.UtcNow
+            };
+
+            _mongoService.Owners.InsertOne(newOwner);
 
             SuccessMessage = "Account created successfully. Please log in.";
-            return RedirectToPage("/LoginOwner");
+            return RedirectToPage("/VerifyOwner", new { ownerId = nextId });
         }
 
         public IActionResult OnPostLogin()
@@ -78,25 +100,5 @@ namespace GMCC.Pages
                 return false;
             }
         }
-    }
-
-    public static class Owners //temporary owner added into list, change after Database implementation
-    {
-        private static readonly List<OwnerAccount> _owners = new();
-
-        public static bool EmailExists(string email) =>
-            _owners.Any(o => o.Email.Equals(email, StringComparison.OrdinalIgnoreCase));
-
-        public static void Add(OwnerAccount owner) => _owners.Add(owner);
-
-        public static OwnerAccount? FindByEmail(string email) =>
-            _owners.FirstOrDefault(o => o.Email.Equals(email, StringComparison.OrdinalIgnoreCase));
-    }
-    public class OwnerAccount
-    {
-        public string FullName { get; set; } = "";
-        public string Email { get; set; } = "";
-        public string ContactNumber { get; set; } = "";
-        public string Password { get; set; } = "";
     }
 }
