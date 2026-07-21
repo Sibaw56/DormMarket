@@ -318,7 +318,7 @@
             </div>
         </form>
 
-        <form method="post">
+        <form method="post" id="mainProfileForm">
 
             <div class="badge-row">
                 @if (!string.IsNullOrEmpty(Model.VerifiedSchool))
@@ -401,12 +401,10 @@
         </form>
 
         <!-- Action Row (Save & Logout below Upload button) -->
-        <form method="post">
-            <div class="action-row">
-                <button type="submit" asp-page-handler="SaveChanges" class="btn-save">Save Changes</button>
-                <button type="submit" asp-page-handler="Logout" class="btn-logout">Log Out</button>
-            </div>
-        </form>
+        <div class="action-row">
+            <button type="submit" form="mainProfileForm" asp-page-handler="SaveChanges" class="btn-save">Save Changes</button>
+            <button type="submit" form="mainProfileForm" asp-page-handler="Logout" class="btn-logout">Log Out</button>
+        </div>
 
         <!-- Account Settings Form -->
         <form method="post" asp-page-handler="ChangePassword">
