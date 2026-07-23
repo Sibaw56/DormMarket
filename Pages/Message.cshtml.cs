@@ -33,6 +33,16 @@ namespace GMCC.Pages
         public string? ContactNumber { get; set; }
         public string? OtherContactLink { get; set; }
 
+        public string? BusinessPermitPath { get; set; }
+        public string? PropertyOwnershipPath { get; set; }
+        public string? LeaseAuthorizationPath { get; set; }
+        public string? OwnerNotes { get; set; }
+        public bool HasAnyDocuments =>
+            !string.IsNullOrWhiteSpace(BusinessPermitPath) ||
+            !string.IsNullOrWhiteSpace(PropertyOwnershipPath) ||
+            !string.IsNullOrWhiteSpace(LeaseAuthorizationPath) ||
+            !string.IsNullOrWhiteSpace(OwnerNotes);
+
         public void OnGet()
         {
             var owner = _mongoService.Owners.Find(o => o.Id == OwnerId).FirstOrDefault();
@@ -48,6 +58,13 @@ namespace GMCC.Pages
             MessengerLink = owner.MessengerLink;
             ContactNumber = owner.ContactNumber;
             OtherContactLink = owner.OtherContactLink;
+
+            // Government ID is intentionally excluded - it's for verification staff only,
+            // not for students to view.
+            BusinessPermitPath = owner.BusinessPermitPath;
+            PropertyOwnershipPath = owner.PropertyOwnershipPath;
+            LeaseAuthorizationPath = owner.LeaseAuthorizationPath;
+            OwnerNotes = owner.ReviewerNotes;
 
             if (DormId > 0)
             {

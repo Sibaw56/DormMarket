@@ -274,7 +274,14 @@
                     {
                         var availability = i < Model.RoomAvailabilities.Count ? Model.RoomAvailabilities[i] : "Available";
                         <tr class="room-row">
-                            <td><input type="text" name="RoomTypeNames" class="room-type-input" value="@Model.RoomTypeNames[i]" placeholder="e.g. Shared (2 pax) room / Solo room" /></td>
+                            <td>
+                                <select name="RoomTypeNames" class="room-type-input">
+                                    <option value="" disabled selected="@(string.IsNullOrEmpty(Model.RoomTypeNames[i]) ? "selected" : null)">Select room type</option>
+                                    <option value="Solo room" selected="@(Model.RoomTypeNames[i] == "Solo room" ? "selected" : null)">Solo room</option>
+                                    <option value="Shared (2-4 pax)" selected="@(Model.RoomTypeNames[i] == "Shared (2-4 pax)" ? "selected" : null)">Shared (2-4 pax)</option>
+                                    <option value="Bedspace" selected="@(Model.RoomTypeNames[i] == "Bedspace" ? "selected" : null)">Bedspace</option>
+                                </select>
+                            </td>
                             <td>
                                 <div class="price-wrap">
                                     <span class="peso">₱</span>
@@ -317,7 +324,14 @@
             const row = document.createElement('tr');
             row.className = 'room-row';
             row.innerHTML = `
-                <td><input type="text" name="RoomTypeNames" class="room-type-input" placeholder="e.g. Shared (4pax)" /></td>
+                <td>
+                    <select name="RoomTypeNames" class="room-type-input">
+                        <option value="" disabled selected>Select room type</option>
+                        <option value="Solo room">Solo room</option>
+                        <option value="Shared (2-4 pax)">Shared (2-4 pax)</option>
+                        <option value="Bedspace">Bedspace</option>
+                    </select>
+                </td>
                 <td>
                     <div class="price-wrap">
                         <span class="peso">₱</span>

@@ -164,6 +164,93 @@
             color: #0f766e;
             font-weight: 700;
         }
+
+        .docs-toggle {
+            width: 100%;
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 14px 18px;
+            font-size: 13px;
+            font-weight: 700;
+            color: #0f766e;
+            cursor: pointer;
+            text-align: left;
+            margin-top: 8px;
+        }
+
+        .docs-toggle:hover {
+            background: #f0fdfa;
+        }
+
+        .docs-panel {
+            display: none;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            background: #fff;
+            padding: 16px 18px;
+            margin-top: 12px;
+        }
+
+        .docs-panel.open {
+            display: block;
+        }
+
+        .docs-panel-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #374151;
+            margin: 0 0 12px;
+        }
+
+        .doc-link-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .doc-link-row:last-of-type {
+            border-bottom: none;
+        }
+
+        .doc-link-name {
+            font-size: 13px;
+            color: #374151;
+        }
+
+        .doc-link-view {
+            font-size: 12px;
+            font-weight: 700;
+            color: #0f766e;
+            text-decoration: none;
+            background: #f0fdfa;
+            padding: 6px 12px;
+            border-radius: 6px;
+        }
+
+        .owner-notes {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #f3f4f6;
+        }
+
+        .owner-notes-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: #374151;
+            margin: 0 0 6px;
+        }
+
+        .owner-notes-text {
+            font-size: 13px;
+            color: #6b7280;
+            background: #f9fafb;
+            border-radius: 6px;
+            padding: 10px 12px;
+            white-space: pre-wrap;
+        }
     </style>
 </head>
 <body>
@@ -264,6 +351,47 @@
                     <span class="btn-action disabled">Open</span>
                 }
             </div>
+
+            @if (Model.HasAnyDocuments)
+            {
+                <button type="button" class="docs-toggle" onclick="document.getElementById('docsPanel').classList.toggle('open')">
+                    View Business Documents
+                </button>
+
+                <div class="docs-panel" id="docsPanel">
+                    <p class="docs-panel-title">Verification documents submitted by this owner</p>
+
+                    @if (!string.IsNullOrWhiteSpace(Model.BusinessPermitPath))
+                    {
+                        <div class="doc-link-row">
+                            <span class="doc-link-name">Business Permit / Mayor's Permit</span>
+                            <a href="@Model.BusinessPermitPath" target="_blank" rel="noopener" class="doc-link-view">View</a>
+                        </div>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(Model.PropertyOwnershipPath))
+                    {
+                        <div class="doc-link-row">
+                            <span class="doc-link-name">Certificate of Property Ownership / Land Title</span>
+                            <a href="@Model.PropertyOwnershipPath" target="_blank" rel="noopener" class="doc-link-view">View</a>
+                        </div>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(Model.LeaseAuthorizationPath))
+                    {
+                        <div class="doc-link-row">
+                            <span class="doc-link-name">Lease / Management Authorization</span>
+                            <a href="@Model.LeaseAuthorizationPath" target="_blank" rel="noopener" class="doc-link-view">View</a>
+                        </div>
+                    }
+
+                    @if (!string.IsNullOrWhiteSpace(Model.OwnerNotes))
+                    {
+                        <div class="owner-notes">
+                            <p class="owner-notes-label">Note from the owner</p>
+                            <div class="owner-notes-text">@Model.OwnerNotes</div>
+                        </div>
+                    }
+                </div>
+            }
         </div>
     }
 </body>

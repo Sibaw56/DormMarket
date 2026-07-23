@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MongoDB.Driver;
@@ -35,6 +36,11 @@ namespace GMCC.Pages
         public List<DormDetailRoomInfo> Rooms { get; set; } = new();
         public string StartingPrice { get; set; } = "";
         public int OwnerId { get; set; }
+        public string EmbedMapUrl { get; set; } = "";
+
+        public List<ReviewDisplayItem> ReviewList { get; set; } = new();
+        public double AverageRating { get; set; }
+        public int ReviewCount { get; set; }
 
         public IActionResult OnGet()
         {
@@ -65,7 +71,33 @@ namespace GMCC.Pages
             Rooms = BuildRoomInfo(listing);
             StartingPrice = Rooms.Count > 0 ? Rooms[0].Price : FormatPrice(listing.MonthlyRent);
 
+            var query = WebUtility.UrlEncode($"{DormitoryName}, {Location}");
+            EmbedMapUrl = $"https://www.google.com/maps?q={query}&output=embed";
+
+            LoadReviews();
+
             return Page();
+        }
+
+        private void LoadReviews()
+        {
+            var reviews = _mongoService.Reviews
+                .Find(r => r.DormId == Id)
+                .SortByDescending(r => r.CreatedAtUtc)
+                .ToList();
+
+            ReviewCount = reviews.Count;
+            AverageRating = reviews.Count > 0 ? Math.Round(reviews.Average(r => r.Rating), 1) : 0;
+
+            ReviewList = reviews.Select(r => new ReviewDisplayItem
+            {
+                StudentName = string.IsNullOrWhiteSpace(r.StudentName) ? "Anonymous Student" : r.StudentName,
+                Rating = r.Rating,
+                ReviewText = r.ReviewText ?? "",
+                IsVerifiedRenter = r.IsVerifiedRenter,
+                PostedOn = r.CreatedAtUtc.ToString("MMM d, yyyy"),
+                PhotoPath = r.PhotoPath
+            }).ToList();
         }
 
         private List<DormDetailRoomInfo> BuildRoomInfo(dormListing l)
@@ -115,5 +147,15 @@ namespace GMCC.Pages
         public string RoomTypeName { get; set; } = "";
         public string Price { get; set; } = "";
         public string Availability { get; set; } = "Available";
+    }
+
+    public class ReviewDisplayItem
+    {
+        public string StudentName { get; set; } = "";
+        public int Rating { get; set; }
+        public string ReviewText { get; set; } = "";
+        public bool IsVerifiedRenter { get; set; }
+        public string PostedOn { get; set; } = "";
+        public string? PhotoPath { get; set; }
     }
 }

@@ -355,19 +355,13 @@
                     </div>
 
                     <p class="section-title">ROOM TYPE</p>
-                    <div class="radio-row">
-                        <label class="radio-item">
-                            <input type="radio" name="RoomType" value="Solo" />
-                            <span>Solo</span>
-                        </label>
-                        <label class="radio-item">
-                            <input type="radio" name="RoomType" value="Shared" />
-                            <span>Shared</span>
-                        </label>
-                        <label class="radio-item">
-                            <input type="radio" name="RoomType" value="Bedspace" />
-                            <span>Bedspace</span>
-                        </label>
+                    <div class="form-group">
+                        <select asp-for="RoomType" class="form-input">
+                            <option value="">Select room type</option>
+                            <option value="Solo room">Solo room</option>
+                            <option value="Shared(2-4pax)">Shared(2-4pax)</option>
+                            <option value="Bedspace">Bedspace</option>
+                        </select>
                     </div>
 
                     <p class="section-title">MONTHLY RENT</p>

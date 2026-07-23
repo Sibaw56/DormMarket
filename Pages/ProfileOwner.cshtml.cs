@@ -182,7 +182,7 @@ namespace GMCC.Pages
         public IActionResult OnPostLogout()
         {
             HttpContext.Session.Clear();
-            return RedirectToPage("/LoginOwner");
+            return RedirectToPage("/Index");
         }
 
         private void LoadFromOwner(ownerUser owner)

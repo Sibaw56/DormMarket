@@ -270,7 +270,7 @@ namespace GMCC.Pages
         public IActionResult OnPostLogout()
         {
             HttpContext.Session.Clear();
-            return RedirectToPage("/LoginStudent");
+            return RedirectToPage("/Index");//MMMMMMMMMMMMMMMMMMMMMM------------------------------------
         }
 
         private void LoadFromStudent(studentUser student)

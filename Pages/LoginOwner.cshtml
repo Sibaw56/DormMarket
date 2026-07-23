@@ -81,21 +81,6 @@
         margin-top: 8px;
     }
 
-    .forgot-link {
-        text-align: right;
-        font-size: 12px;
-        margin-bottom: 4px;
-    }
-
-    .forgot-link button {
-        background: none;
-        border: none;
-        color: #6b7280;
-        cursor: pointer;
-        font-size: 12px;
-        padding: 0;
-    }
-
     .register-link {
         text-align: center;
         font-size: 13px;
@@ -140,10 +125,6 @@
             <div class="form-group">
                 <label class="form-label">PASSWORD</label>
                 <input type="password" asp-for="Password" class="form-input" placeholder="Password" />
-            </div>
-
-            <div class="forgot-link">
-                <button type="submit" asp-page-handler="ForgotPassword">Forgot password?</button>
             </div>
 
             <button type="submit" class="btn-login">Log In</button>
